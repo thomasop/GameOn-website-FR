@@ -169,6 +169,18 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+.modal-btn-close {
+  font-size: 80%;
+  background: #fe142f;
+  display: flex;
+  margin: auto;
+  padding: 2em;
+  color: #fff;
+  padding: 0.75rem 2.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 3rem;
+}
 .content {
   margin: 5% auto;
   width: 100%;
@@ -225,6 +237,12 @@ input {
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
+}
+
+.confirmation {
+  padding: 12rem 10%;
+  margin: 20px auto;
+  display: none;
 }
 /* 
 input[data-error]::after {

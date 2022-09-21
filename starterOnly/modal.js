@@ -12,7 +12,9 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelectorAll(".close");
+const modalconfirm = document.querySelector(".bground");
 const submitBtn = document.querySelector(".btn-submit");
+const btnClose = document.querySelector(".btn-close");
 
 const firstName = document.forms[0][0];
 const lastName = document.forms[0][1];
@@ -26,6 +28,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // close modal event
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
+// close modal confirme
+closeBtn.forEach((btn) => btn.addEventListener("click", closeConfirmation));
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -34,6 +39,16 @@ function launchModal() {
 // close modal
 function closeModal() {
   modalbg.style.display = "none";
+}
+
+// launch modal confirmation
+function openConfirmation() {
+  modalconfirm.style.display = "block";
+}
+
+// close modal confirmation
+function closeConfirmation() {
+  modalconfirm.style.display = "none";
 }
 
 // error message
@@ -129,13 +144,22 @@ function hideErrorMessage(l) {
   return true;
 }
 
+// confirmation function for display and hide modal
+function confirmation() {
+  document.querySelector(".modal-body").style.display = "none";
+  document.querySelector(".confirmation").style.display = "block";
+}
+
+btnClose.addEventListener("click", closeConfirmation);
+
 // to block the behavior of the default click and stay on the form
 submitBtn.addEventListener("click", validate);
 
 // validate function on click form for check form
 function validate(e) {
+  e.preventDefault();
   if (isFirstNameValid(firstName) == true && isLastNameValid(lastName) == true && isEmailValid(email) == true && isBirthdateValid(birthdate) == true && isQuantityValid(quantity) == true && isLocationValid() == true && isCheckbox1Valid() == true) {
-    return true;
+    confirmation();
   } else {
     isFirstNameValid(firstName);
     isLastNameValid(lastName);
@@ -144,6 +168,5 @@ function validate(e) {
     isQuantityValid(quantity);
     isLocationValid();
     isCheckbox1Valid();
-    return false;
   }
 }
