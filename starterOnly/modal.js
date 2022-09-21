@@ -36,6 +36,17 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+// error message
+const messagesErrors = {
+  0 : "Le nom doit comporter au moins deux caractères",
+  1 : "Le prenom doit comporter au moins deux caractères",
+  2 : "Veuillez entrer une adresse mail valide",
+  3 : "Veuillez entrer une date de naissance valide",
+  4 : "Veuillez entrer un nombre de tournois",
+  5 : "Veuillez séléctionner une ville",
+  6 : "Veuillez cocher accepter les conditions d'utilisation"
+}
+
 // regex
 const mailregex = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
 const birthdateRegex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
@@ -44,64 +55,78 @@ const QuantityRegex = /^[0-9]+$/;
 // check if firstname data is valid, return true if valid or false if not valid
 function isFirstNameValid(data) {
   if (data.value.length > 2) {
-    return true;
+    return hideErrorMessage(0);
   } else {
-    return false;
+    return showErrorMessage(0);
   }
 }
 
 // check if lastname data is valid, return true if valid or false if not valid
 function isLastNameValid(data) {
   if (data.value.length > 2) {
-    return true;
+    return hideErrorMessage(1);
   } else {
-    return false;
+    return showErrorMessage(1);
   }
 }
 
 // check if email data is valid, return true if valid or false if not valid
 function isEmailValid(data) {
   if (mailregex.test(data.value) == true) {
-    return true;
+    return hideErrorMessage(2);
   } else {
-    return false;
+    return showErrorMessage(2);
   }
 }
 
 // check if birthdate data is valid, return true if valid or false if not valid
 function isBirthdateValid(data) {
   if (birthdateRegex.test(data.value) == true) {
-    return true;
+    return hideErrorMessage(3);
   } else {
-    return false;
+    return showErrorMessage(3);
   }
 }
 
 // check if quantity data is valid, return true if valid or false if not valid
 function isQuantityValid(data) {
   if (QuantityRegex.test(data.value) == true) {
-    return true;
+    return hideErrorMessage(4);
   } else {
-    return false;
+    return showErrorMessage(4);
   }
 }
 
 // check if location data is valid, return true if valid or false if not valid
 function isLocationValid() {
   if (form.location.value != "") {
-    return true;
+    return hideErrorMessage(5);
   } else {
-    return false;
+    return showErrorMessage(5);
   }
 }
 
 // check if checkbox data is valid, return true if valid or false if not valid
 function isCheckbox1Valid() {
   if (form.checkbox1.checked == true) {
-    return true;
+    return hideErrorMessage(6);
   } else {
-    return false;
+    return showErrorMessage(6);
   }
+}
+
+// show error message
+function showErrorMessage(n) {
+  let errordiv = document.getElementsByClassName("errorform")[n];
+  errordiv.innerHTML = messagesErrors[n];
+  return false;
+}
+
+// hide error message
+function hideErrorMessage(l) {
+  let errordiv = document.getElementsByClassName("errorform")[l];
+  errordiv.innerHTML = "";
+  return true;
 }
 
 // to block the behavior of the default click and stay on the form
