@@ -89,8 +89,18 @@ img {
   .responsive .header-logo {
     margin-top: 10px;
   }
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .confirm-span {
+    text-align: left !important;
+    word-spacing:-4px;
+  }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1109px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -99,13 +109,6 @@ img {
   .topnav.responsive .main-navbar {
     margin-top: 50px;
   }
-  .bground {
-    top: 50px !important;
-    background-color: transparent !important;
-    }
-}
-
-@media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -117,26 +120,17 @@ img {
     display: block;
     text-align: left;
   }
-}
-
-@media screen and (max-width: 768px) {
   .main-navbar {
     float: right;
   }
-} 
+}
 
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-
-  .confirm-span {
-    text-align: left !important;
-    word-spacing:-4px;
-  }
-} 
+@media screen and (max-width: 768px) {
+  .bground {
+      top: 50px !important;
+      background-color: transparent !important;
+    }
+}
 
 main {
   font-size: 130%;
