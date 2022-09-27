@@ -67,27 +67,36 @@ const mailregex = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
 const birthdateRegex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 const QuantityRegex = /^[0-9]+$/;
 
+// validation of the data in the input
+formData[0].addEventListener("input", isFirstNameValid);
+formData[1].addEventListener("input", isLastNameValid);
+formData[2].addEventListener("input", isEmailValid);
+formData[3].addEventListener("input", isBirthdateValid);
+formData[4].addEventListener("input", isQuantityValid);
+formData[5].addEventListener("input", isLocationValid);
+formData[6].addEventListener("input", isCheckbox1Valid);
+
 // check if firstname data is valid, return true if valid or false if not valid
-function isFirstNameValid(data) {
-  if (data.value.length > 2) {
-    return hideErrorMessage(0);
-  } else {
+function isFirstNameValid() {
+  if (firstName.value.trim() == "" || firstName.value.length <= 2) {
     return showErrorMessage(0);
+  } else {
+    return hideErrorMessage(0);
   }
 }
 
 // check if lastname data is valid, return true if valid or false if not valid
-function isLastNameValid(data) {
-  if (data.value.length > 2) {
-    return hideErrorMessage(1);
-  } else {
+function isLastNameValid() {
+  if (lastName.value.trim() == "" || lastName.value.length <= 2) {
     return showErrorMessage(1);
+  } else {
+    return hideErrorMessage(1);
   }
 }
 
 // check if email data is valid, return true if valid or false if not valid
-function isEmailValid(data) {
-  if (mailregex.test(data.value) == true) {
+function isEmailValid() {
+  if (mailregex.test(email.value) == true) {
     return hideErrorMessage(2);
   } else {
     return showErrorMessage(2);
@@ -95,8 +104,8 @@ function isEmailValid(data) {
 }
 
 // check if birthdate data is valid, return true if valid or false if not valid
-function isBirthdateValid(data) {
-  if (birthdateRegex.test(data.value) == true) {
+function isBirthdateValid() {
+  if (birthdateRegex.test(birthdate.value) == true) {
     return hideErrorMessage(3);
   } else {
     return showErrorMessage(3);
@@ -104,8 +113,8 @@ function isBirthdateValid(data) {
 }
 
 // check if quantity data is valid, return true if valid or false if not valid
-function isQuantityValid(data) {
-  if (QuantityRegex.test(data.value) == true) {
+function isQuantityValid() {
+  if (QuantityRegex.test(quantity.value) == true) {
     return hideErrorMessage(4);
   } else {
     return showErrorMessage(4);
@@ -158,7 +167,7 @@ submitBtn.addEventListener("click", validate);
 // validate function on click form for check form
 function validate(e) {
   e.preventDefault();
-  if (isFirstNameValid(firstName) == true && isLastNameValid(lastName) == true && isEmailValid(email) == true && isBirthdateValid(birthdate) == true && isQuantityValid(quantity) == true && isLocationValid() == true && isCheckbox1Valid() == true) {
+  if (isFirstNameValid() == true && isLastNameValid() == true && isEmailValid() == true && isBirthdateValid() == true && isQuantityValid() == true && isLocationValid() == true && isCheckbox1Valid() == true) {
     confirmation();
   } else {
     isFirstNameValid(firstName);
