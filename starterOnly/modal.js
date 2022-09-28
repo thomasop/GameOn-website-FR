@@ -53,8 +53,8 @@ function closeConfirmation() {
 
 // error message
 const messagesErrors = {
-  0 : "Le nom doit comporter au moins deux caractères",
-  1 : "Le prenom doit comporter au moins deux caractères",
+  0 : "Le prénom doit comporter au moins deux caractères",
+  1 : "Le nom doit comporter au moins deux caractères",
   2 : "Veuillez entrer une adresse mail valide",
   3 : "Veuillez entrer une date de naissance valide",
   4 : "Veuillez entrer un nombre de tournois",
@@ -159,6 +159,7 @@ function confirmation() {
   document.querySelector(".confirmation").style.display = "block";
 }
 
+// close modal confirm
 btnClose.addEventListener("click", closeConfirmation);
 
 // to block the behavior of the default click and stay on the form
