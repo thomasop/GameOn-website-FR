@@ -58,6 +58,10 @@ img {
   border-radius: 15px;
 }
 
+.topnav a:hover span, .topnav a.active span {
+  border-bottom: 1px solid white;
+}
+
 .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
@@ -93,11 +97,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-  }
-
-  .confirm-span {
-    text-align: left !important;
-    word-spacing:-4px;
   }
 }
 @media screen and (max-width: 1109px) {
@@ -276,6 +275,7 @@ input {
   padding: 18rem 10%;
   margin: 20px auto;
   display: none;
+  text-align: center;
 }
 /* 
 input[data-error]::after {
