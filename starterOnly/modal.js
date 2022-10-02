@@ -78,7 +78,7 @@ formData[6].addEventListener("input", isCheckbox1Valid);
 
 // check if firstname data is valid, return true if valid or false if not valid
 function isFirstNameValid() {
-  if (firstName.value.trim() == "" || firstName.value.length <= 2) {
+  if (firstName.value.trim() == "" || firstName.value.length < 2) {
     return showErrorMessage(0);
   } else {
     return hideErrorMessage(0);
@@ -87,7 +87,7 @@ function isFirstNameValid() {
 
 // check if lastname data is valid, return true if valid or false if not valid
 function isLastNameValid() {
-  if (lastName.value.trim() == "" || lastName.value.length <= 2) {
+  if (lastName.value.trim() == "" || lastName.value.length < 2) {
     return showErrorMessage(1);
   } else {
     return hideErrorMessage(1);
