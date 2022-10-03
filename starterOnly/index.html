@@ -48,12 +48,15 @@
       </div>
 
       <div class="bground">
-        <div class="content">
-          <span class="close"></span>
+        <div class="content-confirmation">
+          <span class="closeConfirm"></span>
           <div class="confirmation">
             <span class="confirm-span">Merci pour votre inscription</span>
             <input class="btn-close modal-btn-close" type="button" value="Fermer" onclick="closeModal()">
           </div>
+        </div>
+        <div class="content">
+          <span class="close"></span>
           <div class="modal-body">
             <form
               name="reserve"
@@ -62,18 +65,6 @@
               onsubmit="return validate();"
               id="form"
             >
-              <div
-                class="formData">
-                <label for="first">Prénom</label><br>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="first"
-                  name="first"
-                  minlength="2"
-               ><br>
-                <div class="errorform"></div>
-              </div>
               <div
                 class="formData">
                 <label for="first">Prénom</label><br>

@@ -12,6 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelectorAll(".close");
+const closeConfirmBtn = document.querySelectorAll(".closeConfirm");
 const modalconfirm = document.querySelector(".bground");
 const submitBtn = document.querySelector(".btn-submit");
 const btnClose = document.querySelector(".btn-close");
@@ -29,7 +30,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
 // close modal confirme
-closeBtn.forEach((btn) => btn.addEventListener("click", closeConfirmation));
+closeConfirmBtn.forEach((btn) => btn.addEventListener("click", closeConfirmation));
 
 // launch modal form
 function launchModal() {
@@ -48,7 +49,10 @@ function openConfirmation() {
 
 // close modal confirmation
 function closeConfirmation() {
-  modalconfirm.style.display = "none";
+  modalbg.style.display = "none";
+  document.querySelector(".content").style.display = "block";
+  document.querySelector(".content-confirmation").style.display = "none";
+  document.forms[0].reset();
 }
 
 // error message
@@ -59,13 +63,16 @@ const messagesErrors = {
   3 : "Veuillez entrer une date de naissance valide",
   4 : "Veuillez entrer un nombre de tournois",
   5 : "Veuillez séléctionner une ville",
-  6 : "Veuillez cocher accepter les conditions d'utilisation"
+  6 : "Veuillez cocher accepter les conditions d'utilisation",
+  7 : "Veuillez sélectionner une date antérieur à aujourd'hui",
+  8 : "Vous devez être majeur pour vous inscrire"
 }
 
 // regex
-const mailregex = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+const mailregex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,})+)$/;
 const birthdateRegex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 const QuantityRegex = /^[0-9]+$/;
+const TextRegex = /^[a-zA-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+$/;
 
 // validation of the data in the input
 formData[0].addEventListener("input", isFirstNameValid);
@@ -78,7 +85,7 @@ formData[6].addEventListener("input", isCheckbox1Valid);
 
 // check if firstname data is valid, return true if valid or false if not valid
 function isFirstNameValid() {
-  if (firstName.value.trim() == "" || firstName.value.length < 2) {
+  if (firstName.value.trim() == "" || firstName.value.length < 2 || TextRegex.test(firstName.value) == false) {
     return showErrorMessage(0);
   } else {
     return hideErrorMessage(0);
@@ -87,7 +94,7 @@ function isFirstNameValid() {
 
 // check if lastname data is valid, return true if valid or false if not valid
 function isLastNameValid() {
-  if (lastName.value.trim() == "" || lastName.value.length < 2) {
+  if (lastName.value.trim() == "" || lastName.value.length < 2 || TextRegex.test(lastName.value) == false) {
     return showErrorMessage(1);
   } else {
     return hideErrorMessage(1);
@@ -105,7 +112,20 @@ function isEmailValid() {
 
 // check if birthdate data is valid, return true if valid or false if not valid
 function isBirthdateValid() {
+  var today = new Date();
+  var userBirthdate = new Date(birthdate.value);
+  var age = today.getFullYear() - userBirthdate.getFullYear();
+  var month = today.getMonth() - userBirthdate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < userBirthdate.getDate())) 
+    {
+        age--;
+    }
   if (birthdateRegex.test(birthdate.value) == true) {
+    if (userBirthdate > today) {
+      return showErrorMessageBirthdate(7);
+    } else if ( age < 18) {
+      return showErrorMessageBirthdate(8);
+    }
     return hideErrorMessage(3);
   } else {
     return showErrorMessage(3);
@@ -153,10 +173,17 @@ function hideErrorMessage(l) {
   return true;
 }
 
+// show error message birthdate
+function showErrorMessageBirthdate(n) {
+  let errordiv = document.getElementsByClassName("errorform")[3];
+  errordiv.innerHTML = messagesErrors[n];
+  return false;
+}
+
 // confirmation function for display and hide modal
 function confirmation() {
-  document.querySelector(".modal-body").style.display = "none";
-  document.querySelector(".confirmation").style.display = "block";
+  document.querySelector(".content").style.display = "none";
+  document.querySelector(".content-confirmation").style.display = "block";
 }
 
 // close modal confirm
